@@ -7,6 +7,8 @@ registerBlockType( 'my-first-dynamic-gutenberg-block/latest-post', {
     icon: 'megaphone',
     category: 'widgets',
 
+    /*Edit can be rendered using PHP with ServerSideRender.
+    See https://wordpress.org/gutenberg/handbook/blocks/creating-dynamic-blocks*/
     edit: withSelect( function( select ) {
         return {
             posts: select( 'core' ).getEntityRecords( 'postType', 'post' )
