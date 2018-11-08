@@ -18,7 +18,8 @@ function register_dynamic_block_action() {
 	wp_register_script(
 		'my-first-dynamic-gutenberg-block-script',
 		plugins_url( 'myblock.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element' ),
+		true
 	);
 
 	register_block_type(
@@ -36,12 +37,11 @@ add_action( 'init', 'register_dynamic_block_action' );
 /**
  * Renders the block content
  *
- * @param array $attributes block attributes.
- * @param array $content block content.
+ * @param array $atts block attributes.
  *
  * @return string Rendered block markup
  */
-function my_plugin_render_block_latest_post() {
+function my_plugin_render_block_latest_post( $atts ) {
 	$recent_posts = wp_get_recent_posts(
 		array(
 			'numberposts' => 1,

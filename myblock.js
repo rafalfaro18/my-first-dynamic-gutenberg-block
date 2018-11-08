@@ -30,7 +30,7 @@ registerBlockType( 'my-first-dynamic-gutenberg-block/latest-post', {
         );
     } ),
 
-    save: function() {
+    save: function(props) {
         // Rendering in PHP
         return null;
     },
