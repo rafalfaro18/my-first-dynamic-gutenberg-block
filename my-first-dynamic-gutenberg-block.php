@@ -11,6 +11,29 @@
  */
 
 /**
+ * Registers block and required scripts
+ */
+function register_dynamic_block_action() {
+
+	wp_register_script(
+		'my-first-dynamic-gutenberg-block-script',
+		plugins_url( 'myblock.js', __FILE__ ),
+		array( 'wp-blocks', 'wp-element' )
+	);
+
+	register_block_type(
+		'my-first-dynamic-gutenberg-block/latest-post',
+		array(
+			'editor_script'   => 'my-first-dynamic-gutenberg-block-script',
+			'render_callback' => 'my_plugin_render_block_latest_post',
+		)
+	);
+
+}
+
+add_action( 'init', 'register_dynamic_block_action' );
+
+/**
  * Renders the block content
  *
  * @param array $attributes block attributes.
@@ -18,7 +41,7 @@
  *
  * @return string Rendered block markup
  */
-function my_plugin_render_block_latest_post( $attributes, $content ) {
+function my_plugin_render_block_latest_post() {
 	$recent_posts = wp_get_recent_posts(
 		array(
 			'numberposts' => 1,
@@ -37,16 +60,4 @@ function my_plugin_render_block_latest_post( $attributes, $content ) {
 	);
 }
 
-wp_register_script(
-	'my-first-dynamic-gutenberg-block-script',
-	plugins_url( 'myblock.js', __FILE__ ),
-	array( 'wp-blocks', 'wp-element' )
-);
-
-register_block_type(
-	'my-first-dynamic-gutenberg-block/latest-post',
-	array(
-		'editor_script' => 'my-first-dynamic-gutenberg-block-script',
-		'render_callback' => 'my_plugin_render_block_latest_post',
-	)
-);
+add_action( 'init', 'my_plugin_render_block_latest_post' );
