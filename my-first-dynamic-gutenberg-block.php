@@ -57,7 +57,7 @@ function my_plugin_render_block_latest_post( $atts ) {
 		$cf = get_field( 'just_a_test' , $post_id ) ? get_field( 'just_a_test' , $post_id ) : '';
 	}
 	return sprintf(
-		'<span>'.$cf.'</span><a class="wp-block-my-plugin-latest-post" href="%1$s">%2$s</a>',
+		'<span>'.$cf. '</span><a class="wp-block-my-plugin-latest-post" href="%1$s">%2$s</a>',
 		esc_url( get_permalink( $post_id ) ),
 		esc_html( get_the_title( $post_id ) )
 	);
